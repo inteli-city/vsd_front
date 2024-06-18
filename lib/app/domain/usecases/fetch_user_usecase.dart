@@ -3,17 +3,17 @@ import 'package:flutter_clean_architecture_template/app/domain/entities/user_ent
 import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
 import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
 
-abstract class IFetchUsersUsecase {
-  Future<Either<Failure, List<UserEntity>>> call();
+abstract class IFetchUserUsecase {
+  Future<Either<Failure, UserEntity>> call();
 }
 
-class FetchUsersUsecase implements IFetchUsersUsecase {
-  final UserRepository repository;
+class FetchUserUsecase implements IFetchUserUsecase {
+  final IUserRepository repository;
 
-  FetchUsersUsecase({required this.repository});
+  FetchUserUsecase({required this.repository});
 
   @override
-  Future<Either<Failure, List<UserEntity>>> call() async {
-    return await repository.getAll();
+  Future<Either<Failure, UserEntity>> call() async {
+    return await repository.getUser();
   }
 }

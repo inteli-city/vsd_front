@@ -16,7 +16,7 @@ class UserErrorState extends UserState {
 }
 
 class UserSuccessState extends UserState {
-  final List<UserEntity> users;
+  final UserEntity user;
 
-  const UserSuccessState({required this.users});
+  const UserSuccessState({required this.user});
 }

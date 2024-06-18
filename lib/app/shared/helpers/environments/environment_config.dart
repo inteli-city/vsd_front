@@ -1,9 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:flutter_clean_architecture_template/app/data/repositories/dio_user_repository.dart';
-import 'package:flutter_clean_architecture_template/app/data/repositories/mock_user_repository.dart';
+import 'package:flutter_clean_architecture_template/app/data/repositories/user_mock_repository.dart';
+import 'package:flutter_clean_architecture_template/app/data/repositories/vigilance_mock_repository.dart';
 import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
-import 'package:flutter_clean_architecture_template/app/shared/helpers/enums/environment_enum.dart';
+import 'package:flutter_clean_architecture_template/app/domain/repositories/vigilance_repository.dart';
 
 class EnvironmentConfig {
   static const MSS_BASE_URL = String.fromEnvironment('MSS_BASE_URL');
@@ -11,17 +11,31 @@ class EnvironmentConfig {
     'ENV',
   );
 
-  static UserRepository getUserRepo() {
-    EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
-      (element) {
-        return element.name.toUpperCase() == ENV.toUpperCase();
-      },
-      orElse: () => EnvironmentEnum.DEV,
-    );
-    if (value == EnvironmentEnum.DEV) {
-      return MockUserRepository();
-    } else {
-      return DioUserRepository();
-    }
+  static IUserRepository getUserRepo() {
+    // EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
+    //   (element) {
+    //     return element.name.toUpperCase() == ENV.toUpperCase();
+    //   },
+    //   orElse: () => EnvironmentEnum.DEV,
+    // );
+    // if (value == EnvironmentEnum.DEV) {
+    return UserMockRepository();
+    // } else {
+    //   return DioUserRepository();
+    // }
+  }
+
+  static IVigilanceRepository getVigilanceRepo() {
+    // EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
+    //   (element) {
+    //     return element.name.toUpperCase() == ENV.toUpperCase();
+    //   },
+    //   orElse: () => EnvironmentEnum.DEV,
+    // );
+    // if (value == EnvironmentEnum.DEV) {
+    return VigilanceMockRepository();
+    // } else {
+    //   return DioUserRepository();
+    // }
   }
 }

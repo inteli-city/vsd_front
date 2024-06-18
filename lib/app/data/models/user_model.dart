@@ -1,25 +1,41 @@
 import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
-import 'package:flutter_clean_architecture_template/app/domain/enum/state_enum.dart';
 
 class UserModel extends UserEntity {
-  UserModel({required super.id, required super.name, required super.state});
+  const UserModel({
+    required super.userId,
+    required super.name,
+    required super.imageUrl,
+    required super.region,
+    required super.adress,
+    required super.adressNumber,
+  });
 
-  UserModel copyWith({int? id, String? name, StateEnum? state}) {
+  UserModel copyWith({
+    String? userId,
+    String? name,
+    String? imageUrl,
+    String? region,
+    String? adress,
+    int? adressNumber,
+  }) {
     return UserModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      state: state ?? this.state,
+      userId: userId ?? super.userId,
+      name: name ?? super.name,
+      imageUrl: imageUrl ?? super.imageUrl,
+      region: region ?? super.region,
+      adress: adress ?? super.adress,
+      adressNumber: adressNumber ?? super.adressNumber,
     );
   }
 
   factory UserModel.fromJson(Map<String, dynamic> map) {
     return UserModel(
-      id: map['id'],
+      userId: map['user_id'],
       name: map['name'],
-      state: StateEnum.values.firstWhere(
-        (element) =>
-            element.name.toUpperCase() == map['state'].toString().toUpperCase(),
-      ),
+      imageUrl: map['image_url'],
+      region: map['region'],
+      adress: map['adress'],
+      adressNumber: map['adress_number'],
     );
   }
 }

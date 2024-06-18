@@ -1,17 +1,17 @@
-import 'package:flutter_clean_architecture_template/app/domain/enum/state_enum.dart';
-
 class UserEntity {
-  final int id;
+  final String userId;
   final String name;
-  final StateEnum state;
+  final String imageUrl;
+  final String region;
+  final String adress;
+  final int adressNumber;
 
-  const UserEntity({required this.id, required this.name, required this.state});
-
-  Map<String, dynamic> toMap() {
-    return {
-      "id": id,
-      "name": name,
-      "state": state,
-    };
-  }
+  const UserEntity({
+    required this.userId,
+    required this.name,
+    required this.imageUrl,
+    required this.region,
+    required this.adress,
+    required this.adressNumber,
+  });
 }
