@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_template/app/domain/usecases/fetch_vigilances_usecase.dart';
 import 'package:flutter_clean_architecture_template/app/injector.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/states/vigilance_state.dart';
+import 'package:flutter_clean_architecture_template/app/presentation/home/states/vigilance_state.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:logger/logger.dart';
 

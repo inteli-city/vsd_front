@@ -12,11 +12,11 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       scaffoldMessengerKey: rootScaffoldMessengerKey,
-      title: 'Clean Architecture Template',
+      title: 'Vigilancia Solidaria Digital',
       debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.darkTheme,
+      // darkTheme: AppThemes.darkTheme,
       themeMode: ThemeMode.system,
       localizationsDelegates: const [
         S.delegate,
