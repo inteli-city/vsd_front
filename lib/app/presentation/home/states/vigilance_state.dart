@@ -16,7 +16,7 @@ class VigilanceErrorState extends VigilanceState {
 }
 
 class VigilanceSuccessState extends VigilanceState {
-  final List<VigilanceEntity> vigilances;
+  final VigilanceEntity vigilance;
 
-  const VigilanceSuccessState({required this.vigilances});
+  const VigilanceSuccessState({required this.vigilance});
 }

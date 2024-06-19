@@ -28,11 +28,11 @@ class VigilanceProvider with ChangeNotifier {
           GlobalSnackBar.error(error.message);
           return VigilanceErrorState(error: error);
         },
-        (vigilances) {
+        (vigilance) {
           injector.get<Logger>().d(
                 '${DateTime.now()} - Vigilances fetched successfully!',
               );
-          return VigilanceSuccessState(vigilances: vigilances);
+          return VigilanceSuccessState(vigilance: vigilance);
         },
       ),
     );

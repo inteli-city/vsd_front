@@ -4,7 +4,7 @@ import 'package:flutter_clean_architecture_template/app/domain/failures/failures
 import 'package:flutter_clean_architecture_template/app/domain/repositories/vigilance_repository.dart';
 
 abstract class IFetchVigilancesUsecase {
-  Future<Either<Failure, List<VigilanceEntity>>> call();
+  Future<Either<Failure, VigilanceEntity>> call();
 }
 
 class FetchVigilancesUsecase implements IFetchVigilancesUsecase {
@@ -13,7 +13,7 @@ class FetchVigilancesUsecase implements IFetchVigilancesUsecase {
   FetchVigilancesUsecase({required this.repository});
 
   @override
-  Future<Either<Failure, List<VigilanceEntity>>> call() async {
+  Future<Either<Failure, VigilanceEntity>> call() async {
     return await repository.getVigilances();
   }
 }

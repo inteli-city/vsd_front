@@ -3,5 +3,5 @@ import 'package:flutter_clean_architecture_template/app/domain/entities/vigilanc
 import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
 
 abstract class IVigilanceRepository {
-  Future<Either<Failure, List<VigilanceEntity>>> getVigilances();
+  Future<Either<Failure, VigilanceEntity>> getVigilances();
 }
