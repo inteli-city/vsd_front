@@ -91,6 +91,9 @@ class _ConversationListState extends State<ConversationList> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollController.jumpTo(scrollController.position.maxScrollExtent);
+    });
     return Column(
       children: [
         Expanded(

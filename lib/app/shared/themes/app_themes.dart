@@ -17,6 +17,9 @@ class AppThemes {
       indent: 5,
       endIndent: 5,
     ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.primaryBlue,
+    ),
     elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
       elevation: WidgetStatePropertyAll(8),

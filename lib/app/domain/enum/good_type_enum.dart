@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 enum GoodTypeEnum {
   POLICE;
 
-  IconData get icon {
+  Image get image {
     switch (this) {
       case GoodTypeEnum.POLICE:
-        return Icons.local_police;
+        return Image.asset('assets/policeman.png');
     }
   }
 

@@ -18,6 +18,42 @@ class VigilanceProvider with ChangeNotifier {
 
   VigilanceState state = VigilanceInitialState();
 
+  int get points {
+    var success = state as VigilanceSuccessState;
+    var point = 10;
+
+    // ignore: unused_local_variable
+    for (var incident in success.vigilance.incidents) {
+      point -= 3;
+    }
+
+    // ignore: unused_local_variable
+    for (var good in success.vigilance.goods) {
+      point += 7;
+    }
+
+    if (point < 0) {
+      point = 0;
+    }
+    if (point > 10) {
+      point = 10;
+    }
+
+    return point;
+  }
+
+  String get alertMessage {
+    var point = points;
+
+    if (point <= 3) {
+      return 'Você está em uma área perigosa!';
+    } else if (point <= 6) {
+      return 'Você está em uma área de atenção!';
+    } else {
+      return 'Você está em uma área segura!';
+    }
+  }
+
   void setState(VigilanceState value) {
     state = value;
     notifyListeners();

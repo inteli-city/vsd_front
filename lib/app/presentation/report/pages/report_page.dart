@@ -29,197 +29,207 @@ class _ReportPageState extends State<ReportPage> {
           ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildIncidentTypeButton(
-                        context,
-                        IncidentTypeEnum.SUSPICIOUS_VEHICLE,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: _buildIncidentTypeButton(
-                          context,
-                          IncidentTypeEnum.SUSPICIOUS_PERSON,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: _buildIncidentTypeButton(
+                            context,
+                            IncidentTypeEnum.SUSPICIOUS_VEHICLE,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: _buildIncidentTypeButton(
+                            context,
+                            IncidentTypeEnum.SUSPICIOUS_PERSON,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: _buildIncidentTypeButton(
+                            context,
+                            IncidentTypeEnum.ALARM_TRIGGERED,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 5 * 24,
+                      child: TextField(
+                        controller: descriptionController,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: AppColors.white,
+                          hintText: 'Breve descrição do incidente...',
+                          isDense: true,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                          ),
                         ),
                       ),
-                      _buildIncidentTypeButton(
-                        context,
-                        IncidentTypeEnum.ALARM_TRIGGERED,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    height: 5 * 24,
-                    child: TextField(
-                      controller: descriptionController,
-                      maxLines: 5,
+                    ),
+                    const SizedBox(height: 16),
+                    TextField(
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: AppColors.white,
-                        hintText: 'Breve descrição do incidente...',
-                        isDense: true,
+                        hintText: 'Local aproximado da ocorrência...',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.white,
-                      hintText: 'Local aproximado da ocorrência...',
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                    const SizedBox(height: 16),
+                    Text(
+                      ' Imagem do incidente: ',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const SizedBox(height: 8),
+                    Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            final ImagePicker picker = ImagePicker();
+                            file = await picker.pickImage(
+                                source: ImageSource.camera);
+                            setState(() {});
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.white,
+                            padding: const EdgeInsets.all(16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              side: BorderSide(
+                                  color: AppColors.primaryBlue, width: 2),
+                            ),
+                          ),
+                          child: const Text(
+                            'Selecionar imagem',
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    ' Imagem do incidente: ',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.center,
-                    child: SizedBox(
+                    const SizedBox(height: 16),
+                    Align(
+                      alignment: Alignment.center,
+                      child: file != null
+                          ? kIsWeb
+                              ? Image.network(
+                                  file!.path,
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  height:
+                                      MediaQuery.of(context).size.height / 4,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.file(
+                                  File(
+                                    file!.path,
+                                  ),
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  height:
+                                      MediaQuery.of(context).size.height / 4,
+                                  fit: BoxFit.cover,
+                                )
+                          : const SizedBox.shrink(),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () async {
-                          final ImagePicker picker = ImagePicker();
-                          file = await picker.pickImage(
-                              source: ImageSource.camera);
-                          setState(() {});
+                          if (incidentTypeEnum == null ||
+                              descriptionController.text.isEmpty ||
+                              file == null) {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Por favor, preencha todos os campos!',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(color: AppColors.primaryBlue),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            await vigilanceProvider.createIncident(
+                              IncidentNearUserEntity(
+                                incidentId: '',
+                                description: descriptionController.text,
+                                type: incidentTypeEnum!,
+                                imageUrl: file?.path,
+                                distance: 500,
+                              ),
+                            );
+                            descriptionController.clear();
+                            file = null;
+                            incidentTypeEnum = null;
+                            setState(() {});
+                            showDialog(
+                              // ignore: use_build_context_synchronously
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Ocorrência criada com sucesso',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(color: AppColors.primaryBlue),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.white,
-                          padding: const EdgeInsets.all(16),
+                          backgroundColor: AppColors.primaryBlue,
+                          padding: const EdgeInsets.all(24),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
-                            side: BorderSide(
-                                color: AppColors.primaryBlue, width: 2),
                           ),
                         ),
                         child: const Text(
-                          'Selecionar imagem',
+                          'Enviar',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Align(
-                    alignment: Alignment.center,
-                    child: file != null
-                        ? kIsWeb
-                            ? Image.network(
-                                file!.path,
-                                width: MediaQuery.of(context).size.width / 2,
-                                height: MediaQuery.of(context).size.height / 4,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.file(
-                                File(
-                                  file!.path,
-                                ),
-                                width: MediaQuery.of(context).size.width / 2,
-                                height: MediaQuery.of(context).size.height / 4,
-                                fit: BoxFit.cover,
-                              )
-                        : const SizedBox.shrink(),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (incidentTypeEnum == null ||
-                            descriptionController.text.isEmpty ||
-                            file == null) {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text(
-                                  'Por favor, preencha todos os campos!',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .copyWith(color: AppColors.primaryBlue),
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          await vigilanceProvider.createIncident(
-                            IncidentNearUserEntity(
-                              incidentId: '',
-                              description: descriptionController.text,
-                              type: incidentTypeEnum!,
-                              imageUrl: file?.path,
-                              distance: 500,
-                            ),
-                          );
-                          descriptionController.clear();
-                          file = null;
-                          incidentTypeEnum = null;
-                          setState(() {});
-                          showDialog(
-                            // ignore: use_build_context_synchronously
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text(
-                                  'Ocorrência criada com sucesso',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .copyWith(color: AppColors.primaryBlue),
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryBlue,
-                        padding: const EdgeInsets.all(24),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      child: const Text(
-                        'Enviar',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+                    const SizedBox(height: 8),
+                  ],
+                ),
               ),
             );
     });
@@ -248,12 +258,7 @@ class _ReportPageState extends State<ReportPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(
-            incidentType.icon,
-            color: incidentTypeEnum == incidentType
-                ? AppColors.white
-                : AppColors.primaryBlue,
-          ),
+          incidentType.image,
           Text(
             incidentType.alertMessage(),
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(

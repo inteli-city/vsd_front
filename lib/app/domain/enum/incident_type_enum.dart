@@ -7,14 +7,14 @@ enum IncidentTypeEnum {
   SUSPICIOUS_PERSON, // peso 1
   ALARM_TRIGGERED; // peso 2
 
-  IconData get icon {
+  Image get image {
     switch (this) {
       case IncidentTypeEnum.SUSPICIOUS_VEHICLE:
-        return Icons.directions_car;
+        return Image.asset('assets/car.png');
       case IncidentTypeEnum.SUSPICIOUS_PERSON:
-        return Icons.person;
+        return Image.asset('assets/face.png');
       case IncidentTypeEnum.ALARM_TRIGGERED:
-        return Icons.warning;
+        return Image.asset('assets/housesiren.png');
     }
   }
 
