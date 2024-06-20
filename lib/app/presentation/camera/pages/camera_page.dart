@@ -20,7 +20,17 @@ class CameraPage extends StatelessWidget {
           title: 'Itaú Personnalité',
           snippet: 'Av. Luís Carlos Berrini, 1550',
           anchor: const Offset(0.5, 0.5),
-          onTap: () => print('Camera 1'),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (_) => Dialog(
+                child: Image.asset(
+                  "assets/itau.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
         ),
       ),
       Marker(
@@ -30,7 +40,17 @@ class CameraPage extends StatelessWidget {
           title: 'Edifício Igaratá',
           snippet: 'Rua Samuel Morse, 74',
           anchor: const Offset(0.5, 0.5),
-          onTap: () => print('Camera 2'),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (_) => Dialog(
+                child: Image.asset(
+                  "assets/samuelmorse.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
         ),
       ),
       Marker(
@@ -38,9 +58,19 @@ class CameraPage extends StatelessWidget {
         position: const LatLng(-23.610909, -46.695052),
         infoWindow: InfoWindow(
           title: 'Ponto de Ônibus',
-          snippet: 'Avenida Jornalista Roberto Marinho, 1636',
+          snippet: 'Av. Luís Carlos Berrini, 1636',
           anchor: const Offset(0.5, 0.5),
-          onTap: () => print('Camera 3'),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (_) => Dialog(
+                child: Image.asset(
+                  "assets/ponto.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
         ),
       ),
     };
