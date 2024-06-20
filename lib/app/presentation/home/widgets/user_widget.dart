@@ -11,7 +11,7 @@ class UserWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Container(
-        padding: const EdgeInsets.only(left: 16, top: 4, bottom: 4, right: 8),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: AppColors.primaryBlue,
           borderRadius: BorderRadius.circular(10),
@@ -62,13 +62,9 @@ class UserWidget extends StatelessWidget {
               ],
             ),
             CircleAvatar(
+              backgroundColor: AppColors.white,
               radius: 45,
-              backgroundColor: AppColors.primaryBlue,
-              child: CircleAvatar(
-                backgroundColor: AppColors.white,
-                radius: 40,
-                backgroundImage: NetworkImage(user.imageUrl),
-              ),
+              backgroundImage: NetworkImage(user.imageUrl),
             )
           ],
         ),
