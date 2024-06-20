@@ -8,7 +8,7 @@ import 'package:flutter_clean_architecture_template/app/domain/failures/failures
 import 'package:flutter_clean_architecture_template/app/domain/repositories/vigilance_repository.dart';
 
 class VigilanceMockRepository implements IVigilanceRepository {
-  VigilanceEntity vigilances = VigilanceEntity(
+  VigilanceEntity vigilance = VigilanceEntity(
     incidents: [
       IncidentNearUserEntity(
         incidentId: '7ca55c05-11da-4758-ab08-16dd6107bcd9',
@@ -42,6 +42,13 @@ class VigilanceMockRepository implements IVigilanceRepository {
 
   @override
   Future<Either<Failure, VigilanceEntity>> getVigilances() async {
-    return Right(vigilances);
+    return Right(vigilance);
+  }
+
+  @override
+  Future<Either<Failure, VigilanceEntity>> createIncident(
+      IncidentNearUserEntity incident) async {
+    vigilance.incidents.add(incident);
+    return Right(vigilance);
   }
 }

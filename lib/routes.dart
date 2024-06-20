@@ -6,6 +6,7 @@ import 'package:flutter_clean_architecture_template/app/presentation/home/states
 import 'package:flutter_clean_architecture_template/app/presentation/home/stores/providers/user_provider.dart';
 import 'package:flutter_clean_architecture_template/app/presentation/home/stores/providers/vigilance_provider.dart';
 import 'package:flutter_clean_architecture_template/app/presentation/home/widgets/user_widget.dart';
+import 'package:flutter_clean_architecture_template/app/presentation/report/pages/report_page.dart';
 import 'package:flutter_clean_architecture_template/app/presentation/splash/pages/splash_page.dart';
 import 'package:flutter_clean_architecture_template/app/shared/themes/app_colors.dart';
 import 'package:flutter_clean_architecture_template/app/shared/widgets/navigation_bar_widget.dart';
@@ -96,6 +97,22 @@ final router = GoRouter(
           pageBuilder: (context, state) {
             return CustomTransitionPage(
               child: const ChatPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: CurveTween(curve: Curves.easeInOutCirc)
+                      .animate(animation),
+                  child: child,
+                );
+              },
+            );
+          },
+        ),
+        GoRoute(
+          path: routePaths.occurrence,
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              child: const ReportPage(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return FadeTransition(

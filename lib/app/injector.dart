@@ -1,6 +1,7 @@
 import 'package:auto_injector/auto_injector.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_clean_architecture_template/app/domain/repositories/vigilance_repository.dart';
+import 'package:flutter_clean_architecture_template/app/domain/usecases/create_incident_usecase.dart';
 import 'package:flutter_clean_architecture_template/app/domain/usecases/fetch_vigilances_usecase.dart';
 import 'package:flutter_clean_architecture_template/app/presentation/home/stores/providers/vigilance_provider.dart';
 import 'package:logger/logger.dart';
@@ -40,6 +41,7 @@ void registerInstances() {
   );
   injector
       .addLazySingleton<IFetchVigilancesUsecase>(FetchVigilancesUsecase.new);
+  injector.addLazySingleton<ICreateIncidentUsecase>(CreateIncidentUsecase.new);
 
   injector.commit();
 }
