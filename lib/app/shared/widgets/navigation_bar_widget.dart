@@ -42,7 +42,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
       ),
       decoration: BoxDecoration(
         color: AppColors.primaryBlue,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             blurRadius: 20,

@@ -32,30 +32,32 @@ final router = GoRouter(
                   injector.get<VigilanceProvider>()..fetchVigilance(),
             ),
           ],
-          child: Scaffold(
-            body: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Consumer<UserProvider>(
-                  builder: (context, userProvider, child) {
-                    var userState = userProvider.state;
-                    return userState is UserSuccessState
-                        ? UserWidget(
-                            user: userState.user,
-                          )
-                        : Center(
-                            child: CircularProgressIndicator(
-                              color: AppColors.primaryBlue,
-                            ),
-                          );
-                  },
-                ),
-                Expanded(
-                  child: child,
-                ),
-              ],
+          child: SafeArea(
+            child: Scaffold(
+              body: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Consumer<UserProvider>(
+                    builder: (context, userProvider, child) {
+                      var userState = userProvider.state;
+                      return userState is UserSuccessState
+                          ? UserWidget(
+                              user: userState.user,
+                            )
+                          : Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryBlue,
+                              ),
+                            );
+                    },
+                  ),
+                  Expanded(
+                    child: child,
+                  ),
+                ],
+              ),
+              bottomNavigationBar: const NavigationBarWidget(),
             ),
-            bottomNavigationBar: const NavigationBarWidget(),
           ),
         );
       },

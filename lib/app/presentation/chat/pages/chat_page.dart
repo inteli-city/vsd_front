@@ -11,38 +11,6 @@ class ChatPage extends StatelessWidget {
   }
 }
 
-class ChatInput extends StatelessWidget {
-  const ChatInput({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(right: 16, left: 16, top: 8),
-      child: Row(
-        children: [
-          const Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Digite sua mensagem...',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 16),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.send),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class ConversationList extends StatefulWidget {
   const ConversationList({
     super.key,
@@ -179,7 +147,10 @@ class _ConversationListState extends State<ConversationList> {
               ),
             ],
           ),
-        )
+        ),
+        const SizedBox(
+          height: 8,
+        ),
       ],
     );
   }

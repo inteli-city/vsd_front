@@ -23,6 +23,7 @@ dependencies:
   provider: ^6.1.2
   google_maps_flutter: ^2.7.0
   image_picker: ^1.1.2
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +34,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/logo.png"
+  adaptive_icon_foreground: "assets/logo_foreground.png"
   
 flutter_intl:
   enabled: true

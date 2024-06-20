@@ -6,8 +6,8 @@ import 'package:flutter_clean_architecture_template/app/domain/failures/failures
 
 class UserMockRepository implements IUserRepository {
   UserEntity user = const UserModel(
-    userId: '53df5564-3777-4715-86b4-bb7855af695a',
-    name: 'MARIO ROBERTO GAIA GATES',
+    userId: '53df5564-3777-4715-86b4',
+    name: 'JOÃO GAIA GATES',
     imageUrl: 'https://intelicity-assets.s3.sa-east-1.amazonaws.com/avatar.png',
     region: 'JARDIM PAULISTANO',
     adress: 'RUA PRUDENTE CORREIA',

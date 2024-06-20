@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_clean_architecture_template/app/shared/themes/app_colors.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_clean_architecture_template/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:flutter_clean_architecture_template/app/shared/themes/app_themes.dart';
@@ -10,6 +12,12 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: AppColors.primaryBlue,
+        systemNavigationBarColor: AppColors.primaryBlue,
+      ),
+    );
     return MaterialApp.router(
       scaffoldMessengerKey: rootScaffoldMessengerKey,
       title: 'Vigilancia Solidaria Digital',
